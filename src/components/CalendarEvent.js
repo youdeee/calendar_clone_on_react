@@ -1,33 +1,33 @@
-import React, { useReducer } from 'react';
+import React, { useReducer } from 'react'
+
+import { makeStyles } from '@material-ui/core/styles'
+import Box from '@material-ui/core/Box'
 import EventModal from './EventModal'
 
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-
 const initialState = {
-  showEventModal: false
+  showEventModal: false,
 }
 
 const reducer = (state, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'TOGGLE_EVENT_MODAL':
       return {
         ...state,
-        showEventModal: action.payload
+        showEventModal: action.payload,
       }
     default:
-      return state;
+      return state
   }
 }
 
 const useStyles = makeStyles((theme) => ({
   event: {
-    padding: theme.spacing(0.2)
-  }
-}));
+    padding: theme.spacing(0.2),
+  },
+}))
 
 const CalendarEvent = (props) => {
-  const classes = useStyles();
+  const classes = useStyles()
   const [state, dispatch] = useReducer(reducer, initialState)
 
   return (
@@ -38,8 +38,8 @@ const CalendarEvent = (props) => {
         color="white"
         borderRadius={4}
         onClick={(e) => {
-            e.stopPropagation();
-            dispatch({ type: 'TOGGLE_EVENT_MODAL', payload: true });
+          e.stopPropagation()
+          dispatch({ type: 'TOGGLE_EVENT_MODAL', payload: true })
         }}
       >
         {props.event.name || '(タイトルなし)'}
@@ -47,7 +47,7 @@ const CalendarEvent = (props) => {
       <EventModal
         open={state.showEventModal}
         onClose={() => {
-            dispatch({ type: 'TOGGLE_EVENT_MODAL', payload: false});
+          dispatch({ type: 'TOGGLE_EVENT_MODAL', payload: false })
         }}
         event={props.event}
         day={props.day}
@@ -56,4 +56,4 @@ const CalendarEvent = (props) => {
   )
 }
 
-export default CalendarEvent;
+export default CalendarEvent

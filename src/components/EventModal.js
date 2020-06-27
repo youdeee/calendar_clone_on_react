@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
-import { Store } from './App';
+import React, { useContext } from 'react'
 
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import Modal from '@material-ui/core/Modal';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import PlaceIcon from '@material-ui/icons/Place';
-import NotesIcon from '@material-ui/icons/Notes';
-import DeleteIcon from '@material-ui/icons/Delete';
-import CloseIcon from '@material-ui/icons/Close';
+import { makeStyles } from '@material-ui/core/styles'
+import Box from '@material-ui/core/Box'
+import Grid from '@material-ui/core/Grid'
+import Modal from '@material-ui/core/Modal'
+import AccessTimeIcon from '@material-ui/icons/AccessTime'
+import PlaceIcon from '@material-ui/icons/Place'
+import NotesIcon from '@material-ui/icons/Notes'
+import DeleteIcon from '@material-ui/icons/Delete'
+import CloseIcon from '@material-ui/icons/Close'
+import { Store } from './App'
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -24,27 +24,33 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     minWidth: '300px',
   },
-}));
+}))
 
 const EventModal = (props) => {
-  const classes = useStyles();
-  const { dispatch } = useContext(Store);
+  const classes = useStyles()
+  const { dispatch } = useContext(Store)
 
   return (
     <Modal
       open={props.open}
       onClose={props.onClose}
       className={classes.modal}
-      onClick={(e) => e.stopPropagation() }
+      onClick={(e) => e.stopPropagation()}
     >
       <Box className={classes.paper}>
         <Box display="flex" flexDirection="row-reverse">
           <CloseIcon onClick={props.onClose} />
           <DeleteIcon
             onClick={(e) => {
-                e.stopPropagation();
-                dispatch({ type: 'DELETE_EVENT', payload: { ...props.event, day: props.day.format('YYYY-MM-DD') } });
-                props.onClose();
+              e.stopPropagation()
+              dispatch({
+                type: 'DELETE_EVENT',
+                payload: {
+                  ...props.event,
+                  day: props.day.format('YYYY-MM-DD'),
+                },
+              })
+              props.onClose()
             }}
           />
         </Box>
@@ -82,4 +88,4 @@ const EventModal = (props) => {
   )
 }
 
-export default EventModal;
+export default EventModal
